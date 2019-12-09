@@ -1,0 +1,23 @@
+
+desenho
+= _ "draw" _ s:shape _ {return factory.criaNo("draw", [s]);}
+
+shape =
+_ "square" _ "-side=" _ len: int _ att: attribute* _ {return factory.criaNo("square", [len,att]);}
+/ _ "circle" _ "-radius=" _ r: int _ att:attribute* _ {return factory.criaNo("circle",[r,att]);}
+/_"line"_ "-p1="_ p1: point _ "-p2=" _ p2: point _ {return factory.criaNo("line",[p1,p2]);}
+
+attribute
+=
+_ "-color=" _ [a-z]+ _ { return factory.criaNo("color",[text()]);}
+/ "-center=" _ p:point _ {return factory.criaNo("center", [p]);}
+
+point
+  = _ x:int _","_ y:int _ { return factory.criaNo("ponto",[x,y]); }
+
+
+int
+  = _ [0-9]+ { return parseFloat(text(), 10); }
+
+_ "whitespace"
+  = [ \t\n\r]*
