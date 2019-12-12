@@ -1,12 +1,12 @@
 package compilador;
-import javax.script.*;
 
+import java.awt.Color;
+
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+
+import desenhos.DesenhaElipse;
 import desenhos.DesenhaLinha;
-import desenhos.Desenhar;
-import desenhos.RegistrationFormApplication;
-
-import java.awt.geom.*;
-import java.util.*;
 
 public class ExecutarCompilador {
 
@@ -14,6 +14,24 @@ public class ExecutarCompilador {
 		System.out.println(s);
 	}
 
+	public Color returnColor(String s) {
+		switch(s) {
+		case "blue":
+			return Color.blue;
+		case "pink":
+			return Color.pink;
+		case "yellow":
+			return Color.yellow;
+		case "black":
+			return Color.black;
+		case "green":
+			return Color.green;
+		default:
+			return null;
+		}
+		
+		
+	}
 
 	@SuppressWarnings("unused")
 	public String avaliador(Object obj) {
@@ -37,6 +55,11 @@ public class ExecutarCompilador {
 			   break;
 		case "circle":
 			System.out.println("circle : O radius:= " + Float.parseFloat(childs[0].toString()) + " color :" + childs[1].toString());
+			Double radius = (Double) childs[0];
+			Color circleColor = returnColor((String) childs[1]);
+			DesenhaElipse desenhaCirculo = new DesenhaElipse(radius, radius,circleColor);
+			desenhaCirculo.main(desenhaCirculo);
+			println(radius.toString());
 			break;
 		case "line":
 			System.out.println("p1: " + childs[0].toString() +" p2: " +  childs[1].toString() + "color: "+ childs[2].toString());
@@ -69,6 +92,11 @@ public class ExecutarCompilador {
 			break;
 		case "ellipse":
 			println("ellipse");
+			Double a = (Double) childs[0];
+			Double b = (Double) childs[1];
+			Color ellipseColor = returnColor((String) childs[2]);
+			DesenhaElipse desenhaElipse = new DesenhaElipse(a, b,ellipseColor);
+			desenhaElipse.main(desenhaElipse);
 			break;
 			default:
 				throw new RuntimeException("Nao sei avaliar: "+expr);
@@ -81,14 +109,15 @@ public class ExecutarCompilador {
 		ScriptEngine engine = new ScriptEngineManager().getEngineByName("nashorn");
 		engine.put("factory", new Factory());
 		engine.eval("parser = load('parser.js');");
-		//engine.put("src","draw circle -radius= 5");
-		engine.put("src", "draw line -p1= 1,1 -p2= 327,432 blue");
+//		engine.put("src","draw circle -radius= 50 blue");
+		engine.put("src", "draw ellipse -a=50 -b=100 blue");
+		//engine.put("src", "draw line -p1= 1,1 -p2= 327,432 blue");
 		Object result = engine.eval("parser.parse(src);");
 		System.out.println("Codigo Fonte = " + engine.get("src"));
 		System.out.println("Arvore = " + result);
 		System.out.println("Execucao:");
 		avaliador(result);
-		Desenhar.main();
+//		Desenhar.main();
 		
 
 	}

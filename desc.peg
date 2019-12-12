@@ -8,6 +8,7 @@ _ "square" _ "-side=" _ len: int _ c:color _ {return factory.criaNo("square", [l
 /_"line"_ "-p1="_ p1: point _ "-p2=" _ p2: point _ c:color {return factory.criaNo("line",[p1,p2,c]);}
 / _ "triangle" _ "-p1=" _ p1: point _ "-p2=" _ p2:point _ "-p3=" _ p3:point _ c:color {return factory.criaNo("triangle",[p1,p2,p3,c]);}
 / _ "rectangle" _ "-a=" _ a:int _ "-b=" _ b:int _ c:color _ {return factory.criaNo("rectangle",[a,b,c]);}
+/_ "ellipse" _ "-a=" _ a:int _ "-b=" _ b:int _ c:color _ {return factory.criaNo("ellipse", [a,b,c]);}
 
 
 color

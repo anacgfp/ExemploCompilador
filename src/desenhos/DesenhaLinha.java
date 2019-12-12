@@ -35,7 +35,7 @@ public class DesenhaLinha extends JPanel {
 	}
 	
 	public  void main(DesenhaLinha desenhaLinha) {
-		JFrame frame = new JFrame( "Drawing 2D shapes" );
+		JFrame frame = new JFrame( "Desenha Linha" );
 		frame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
 		frame.add(desenhaLinha);
 		frame.setSize( 425, 200 );
