@@ -11,6 +11,8 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+import compilador.ExecutarCompilador;
+
 @SuppressWarnings("serial")
 public class TelaInicial extends JFrame implements ActionListener{
 	private JTextField code;
@@ -19,20 +21,21 @@ public class TelaInicial extends JFrame implements ActionListener{
 	public String main () {
 		JFrame jframe = new JFrame("Projeto de Compiladores 2019.2");
 		jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE );
-		jframe.setBackground(Color.LIGHT_GRAY);
+		jframe.setBackground(Color.pink);
 		JLabel label = new JLabel("Código: ", SwingConstants.CENTER);
-		 jframe.getContentPane().add(label,BorderLayout.CENTER);	
+		label.setBounds(10, 10, 100, 40);
+		jframe.add(label);	
 		 code = new JTextField();
-		 code.setBounds(50, 50, 50, 50);
+		 code.setBounds(50, 50, 200, 40);
 		 button =new JButton(" Submit ");  
-		 button.setBounds(200,200,50,50);
+		 button.setBounds(90,150,100,40);
 		 button.addActionListener(this);
 		 jframe.add(code);
 		 jframe.add(button);
 		 jframe.setLocationRelativeTo(null);
 	     jframe.setLayout(null);  
 
-		 jframe.setSize(500,500);
+		 jframe.setSize(300,300);
 		 jframe.setVisible(true);
 		return retorno;
 	}
@@ -42,6 +45,11 @@ public class TelaInicial extends JFrame implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		String s1 = code.getText();
 		retorno = s1;
+		try {
+			new ExecutarCompilador().main(s1);
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
 		
 	}
 

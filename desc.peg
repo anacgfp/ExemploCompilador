@@ -1,3 +1,7 @@
+programa
+= _ d1: desenho _ s: programa _ {return factory.criaNo("programa", [d1,s]);} 
+/_ d1:desenho _ { return factory.criaNo("programa", [d1]);} 
+ 
 
 desenho
 = _ "draw" _ s:shape _ {return factory.criaNo("draw", [s]);}

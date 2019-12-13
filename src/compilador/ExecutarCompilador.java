@@ -1,36 +1,23 @@
 package compilador;
 
 import java.awt.Color;
-
+import java.util.ArrayList;
+import java.util.List;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 
+import desenhos.Desenha;
 import desenhos.DesenhaElipse;
 import desenhos.DesenhaLinha;
+import desenhos.DesenhaRetangulo;
+import desenhos.TelaDesenhos;
 
 public class ExecutarCompilador {
-
+	
+	private List<String> impressao = new ArrayList<String>();	
+	
 	public void println(String s) {
 		System.out.println(s);
-	}
-
-	public Color returnColor(String s) {
-		switch(s) {
-		case "blue":
-			return Color.blue;
-		case "pink":
-			return Color.pink;
-		case "yellow":
-			return Color.yellow;
-		case "black":
-			return Color.black;
-		case "green":
-			return Color.green;
-		default:
-			return null;
-		}
-		
-		
 	}
 
 	@SuppressWarnings("unused")
@@ -42,40 +29,40 @@ public class ExecutarCompilador {
 		Object childs[] = expr.childs;
 		
 		switch (expr.label) {
+		case "programa":
+			println("programa: ");
+			
+			for (int i =0; i<childs.length; i++) {
+				avaliador(childs[i]);
+			}
+			break;
 		case "draw": 
 			   System.out.println("draw: ");
 			   avaliador(childs[0]);
 			   break;
 		case "square":
-				System.out.println("square: ");
-			   avaliador((TreeNode)childs[0]);
-			   if((TreeNode)childs[1] != null) {
-				   avaliador(childs[1]);
-			   }
+				Double side = (Double) childs[0];
+			    String quadrado = "square" + "," +side.toString() + "," + (String) childs[1];
+			    println(quadrado);
+			    impressao.add(quadrado);			   
 			   break;
 		case "circle":
-			System.out.println("circle : O radius:= " + Float.parseFloat(childs[0].toString()) + " color :" + childs[1].toString());
 			Double radius = (Double) childs[0];
-			Color circleColor = returnColor((String) childs[1]);
-			DesenhaElipse desenhaCirculo = new DesenhaElipse(radius, radius,circleColor);
-			desenhaCirculo.main(desenhaCirculo);
 			println(radius.toString());
+			String circulo = "circle" + "," + radius.toString() + "," + (String) childs[1];
+			println(circulo);
+			impressao.add(circulo);
 			break;
 		case "line":
-			System.out.println("p1: " + childs[0].toString() +" p2: " +  childs[1].toString() + "color: "+ childs[2].toString());
-			String[] x1x2 = avaliador(childs[0]).split(",");
-			Float x1 = Float.valueOf(x1x2[0]);
-			Float x2 = Float.valueOf(x1x2[1]);
-			String[] y1y2 = avaliador(childs[1]).split(",");
-			Float y1 = Float.valueOf(y1y2[0]);
-			Float y2 = Float.valueOf(y1y2[1]);
+			//Float x1 = Float.valueOf(x1x2[0]);
 			String color = (childs[2]).toString();
-			DesenhaLinha desenhaLinha = new DesenhaLinha(x1,x2,y1,y2,color);
-			desenhaLinha.main(desenhaLinha);
+			String linha = "line" + "," + avaliador(childs[0]) + "," +avaliador(childs[1]) + "," + (String) childs[2].toString();
+			println(linha);
+			impressao.add(linha);
 			break;
 			
 		case "color":  
-			System.out.println("b"+ Integer.parseInt((String)childs[0]));
+			System.out.println("cor:"+ Integer.parseInt((String)childs[0]));
 			break;
 
 		case "point" : 
@@ -85,18 +72,23 @@ public class ExecutarCompilador {
 			System.out.println(" int "+ Float.parseFloat((String)childs[0]));
 			break;
 		case "triangle":
-			println("triangle");
+			String triangulo = "triangle" + "," + avaliador(childs[0]) + "," +avaliador(childs[1]) + "," + avaliador(childs[2]) + "," + (String) childs[3].toString();
+			println(triangulo);
+			impressao.add(triangulo);
 			break;
 		case "rectangle":
-			println("rectangle");
+			Double arec = (Double) childs[0];
+			Double brec = (Double) childs[1];
+			String retangulo = "rectangle" + "," + arec.toString() + "," + brec.toString() + "," + (String) childs[2].toString();
+			println(retangulo);
+			impressao.add(retangulo);
 			break;
 		case "ellipse":
-			println("ellipse");
 			Double a = (Double) childs[0];
 			Double b = (Double) childs[1];
-			Color ellipseColor = returnColor((String) childs[2]);
-			DesenhaElipse desenhaElipse = new DesenhaElipse(a, b,ellipseColor);
-			desenhaElipse.main(desenhaElipse);
+			String elipse = "ellipse" + "," + a.toString() + "," + b.toString() + "," + (String) childs[2].toString();
+			println(elipse);
+			impressao.add(elipse);
 			break;
 			default:
 				throw new RuntimeException("Nao sei avaliar: "+expr);
@@ -105,19 +97,20 @@ public class ExecutarCompilador {
 
 	}; 
 
-	public void main() throws Exception {
+	public void main(String s) throws Exception {
 		ScriptEngine engine = new ScriptEngineManager().getEngineByName("nashorn");
 		engine.put("factory", new Factory());
 		engine.eval("parser = load('parser.js');");
 //		engine.put("src","draw circle -radius= 50 blue");
-		engine.put("src", "draw ellipse -a=50 -b=100 blue");
+//		engine.put("src", "draw ellipse -a=50 -b=100 blue");
 		//engine.put("src", "draw line -p1= 1,1 -p2= 327,432 blue");
+		engine.put("src", s);
 		Object result = engine.eval("parser.parse(src);");
 		System.out.println("Codigo Fonte = " + engine.get("src"));
 		System.out.println("Arvore = " + result);
 		System.out.println("Execucao:");
 		avaliador(result);
-//		Desenhar.main();
+		new TelaDesenhos().main(impressao);
 		
 
 	}
