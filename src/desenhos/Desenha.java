@@ -63,7 +63,7 @@ public class Desenha extends JPanel {
 			switch(tokens[0]) {
 			case "square":
 				g2d.setColor(returnColor(tokens[2].trim()));
-				g2d.fill(new Rectangle2D.Double(0, 0, Double.parseDouble(tokens[1]), Double.parseDouble(tokens[1]) ) );
+				g2d.fill(new Rectangle2D.Double(Double.parseDouble(tokens[3]), Double.parseDouble(tokens[4]), Double.parseDouble(tokens[1]), Double.parseDouble(tokens[1]) ) );
 				break;
 			case "line":
 				g2d.setColor(returnColor(tokens[5].trim()));
@@ -71,15 +71,15 @@ public class Desenha extends JPanel {
 				break;
 			case "circle":
 				g2d.setColor(returnColor(tokens[2].trim()));
-				g2d.fill(new Ellipse2D.Double( 0, 0,Double.valueOf(tokens[1]), Double.valueOf(tokens[1]) ) );
+				g2d.fill(new Ellipse2D.Double( Double.parseDouble(tokens[3]), Double.parseDouble(tokens[4]),Double.valueOf(tokens[1]), Double.valueOf(tokens[1]) ) );
 				break;
 			case "rectangle":
 				g2d.setColor(returnColor(tokens[3].trim()));
-				g2d.fill(new Rectangle2D.Double(0, 0, Double.valueOf(tokens[1]), Double.valueOf(tokens[2]) ));
+				g2d.fill(new Rectangle2D.Double(Double.parseDouble(tokens[4]), Double.parseDouble(tokens[5]), Double.valueOf(tokens[1]), Double.valueOf(tokens[2]) ));
 				break;
 			case "ellipse":
 				g2d.setColor(returnColor(tokens[3].trim()));
-				g2d.fill(new Ellipse2D.Double( 0, 0,Double.valueOf(tokens[1]), Double.valueOf(tokens[2]) ) );
+				g2d.fill(new Ellipse2D.Double( Double.parseDouble(tokens[4]), Double.parseDouble(tokens[5]),Double.valueOf(tokens[1]), Double.valueOf(tokens[2]) ) );
 				break;
 			case "triangle":
 				g2d.setColor(returnColor(tokens[7].trim()));

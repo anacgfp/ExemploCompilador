@@ -42,14 +42,18 @@ public class ExecutarCompilador {
 			   break;
 		case "square":
 				Double side = (Double) childs[0];
-			    String quadrado = "square" + "," +side.toString() + "," + (String) childs[1];
+				Double xsquare = (Double) childs[2];
+				Double ysquare = (Double) childs[3];
+			    String quadrado = "square" + "," +side.toString() + "," + (String) childs[1] + "," + xsquare.toString() +","+ ysquare.toString();
 			    println(quadrado);
 			    impressao.add(quadrado);			   
 			   break;
 		case "circle":
 			Double radius = (Double) childs[0];
 			println(radius.toString());
-			String circulo = "circle" + "," + radius.toString() + "," + (String) childs[1];
+			Double xcircle = (Double) childs[2];
+			Double ycircle = (Double) childs[3];
+			String circulo = "circle" + "," + radius.toString() + "," + (String) childs[1] + "," + xcircle.toString() + "," + ycircle.toString();
 			println(circulo);
 			impressao.add(circulo);
 			break;
@@ -79,14 +83,16 @@ public class ExecutarCompilador {
 		case "rectangle":
 			Double arec = (Double) childs[0];
 			Double brec = (Double) childs[1];
-			String retangulo = "rectangle" + "," + arec.toString() + "," + brec.toString() + "," + (String) childs[2].toString();
+			Double xrect = (Double) childs[3];
+			Double yrect = (Double) childs[4];
+			String retangulo = "rectangle" + "," + arec.toString() + "," + brec.toString() + "," + (String) childs[2].toString() + "," + xrect.toString() + "," + yrect.toString();
 			println(retangulo);
 			impressao.add(retangulo);
 			break;
 		case "ellipse":
 			Double a = (Double) childs[0];
 			Double b = (Double) childs[1];
-			String elipse = "ellipse" + "," + a.toString() + "," + b.toString() + "," + (String) childs[2].toString();
+			String elipse = "ellipse" + "," + a.toString() + "," + b.toString() + "," + (String) childs[2].toString() + "," + ((Double)childs[3]).toString() + "," + ((Double) childs[4]).toString();
 			println(elipse);
 			impressao.add(elipse);
 			break;

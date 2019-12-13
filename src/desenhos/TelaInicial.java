@@ -19,9 +19,8 @@ public class TelaInicial extends JFrame implements ActionListener{
 	private JButton button;
 	private String retorno;
 	public String main () {
-		JFrame jframe = new JFrame("Projeto de Compiladores 2019.2");
+		JFrame jframe = new JFrame("Projeto de Compiladores");
 		jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE );
-		jframe.setBackground(Color.pink);
 		JLabel label = new JLabel("Código: ", SwingConstants.CENTER);
 		label.setBounds(10, 10, 100, 40);
 		jframe.add(label);	
@@ -35,7 +34,9 @@ public class TelaInicial extends JFrame implements ActionListener{
 		 jframe.setLocationRelativeTo(null);
 	     jframe.setLayout(null);  
 
-		 jframe.setSize(300,300);
+		 jframe.setSize(325,300);
+//		 jframe.setBackground(Color.pink);
+		 jframe.getContentPane().setBackground(Color.pink);
 		 jframe.setVisible(true);
 		return retorno;
 	}
