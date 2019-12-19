@@ -1,15 +1,9 @@
 package compilador;
 
-import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
-
-import desenhos.Desenha;
-import desenhos.DesenhaElipse;
-import desenhos.DesenhaLinha;
-import desenhos.DesenhaRetangulo;
 import desenhos.TelaDesenhos;
 
 public class ExecutarCompilador {

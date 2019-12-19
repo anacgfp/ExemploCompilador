@@ -4,8 +4,6 @@ import java.util.List;
 
 import javax.swing.JFrame;
 
-import compilador.ExecutarCompilador;
-
 public class TelaDesenhos {
 	
 	public void main(List<String> impressao) {

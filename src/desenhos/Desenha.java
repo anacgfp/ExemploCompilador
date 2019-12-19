@@ -12,6 +12,10 @@ import java.util.List;
 
 import javax.swing.JPanel;
 
+/*
+ * @Author: Ana Catarina
+ */
+@SuppressWarnings("serial")
 public class Desenha extends JPanel {
 
 	private List<String> impressao = new ArrayList<String>();
@@ -22,6 +26,10 @@ public class Desenha extends JPanel {
 	public Desenha(List<String> impressao) {
 		this.impressao = impressao;
 	}
+	/*
+	 * Método que retorna um objeto do tipo Color a partir de uma string - conjunto limitado.
+	 * @param String cor
+	 */
 	public Color returnColor(String s) {
 		switch(s) {
 		case "blue":
@@ -45,18 +53,7 @@ public class Desenha extends JPanel {
 	public void paintComponent(Graphics g) {
 		super.paintComponent( g ); // call superclass's paintComponent
 		Graphics2D g2d = ( Graphics2D ) g;// cast g to Graphics2D
-		
-/*		for(String s : impressao) {
-			String[] tokens = s.split(",");
-			
-			switch(tokens[0]) {
-			case "square":
-				g2d.setColor(returnColor(tokens[2]));
-				g2d.fill(new Rectangle2D.Double(0, 0, Double.parseDouble(tokens[1]), Double.parseDouble(tokens[1]) ) );
-			}
-			
-		}
-*/
+
 		for(int i = 0; i< impressao.size(); i++) {	
 			String[] tokens = impressao.get(i).split(",");
 			

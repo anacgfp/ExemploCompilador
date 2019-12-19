@@ -1,6 +1,5 @@
 package desenhos;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,6 +12,9 @@ import javax.swing.SwingConstants;
 
 import compilador.ExecutarCompilador;
 
+/*
+ * @Author: Ana Catarina
+ */
 @SuppressWarnings("serial")
 public class TelaInicial extends JFrame implements ActionListener{
 	private JTextField code;
@@ -22,20 +24,19 @@ public class TelaInicial extends JFrame implements ActionListener{
 		JFrame jframe = new JFrame("Projeto de Compiladores");
 		jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE );
 		JLabel label = new JLabel("Código: ", SwingConstants.CENTER);
-		label.setBounds(10, 10, 100, 40);
+		label.setBounds(75, 10, 100, 40);
 		jframe.add(label);	
 		 code = new JTextField();
-		 code.setBounds(50, 50, 200, 40);
+		 code.setBounds(75, 50, 450, 40);
 		 button =new JButton(" Submit ");  
-		 button.setBounds(90,150,100,40);
+		 button.setBounds(250,150,100,40);
 		 button.addActionListener(this);
 		 jframe.add(code);
 		 jframe.add(button);
 		 jframe.setLocationRelativeTo(null);
 	     jframe.setLayout(null);  
 
-		 jframe.setSize(325,300);
-//		 jframe.setBackground(Color.pink);
+		 jframe.setSize(600,300);
 		 jframe.getContentPane().setBackground(Color.pink);
 		 jframe.setVisible(true);
 		return retorno;
